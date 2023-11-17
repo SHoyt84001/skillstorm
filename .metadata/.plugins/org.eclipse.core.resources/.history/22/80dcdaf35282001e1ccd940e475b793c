@@ -1,0 +1,10 @@
+class Vehicle{//class body
+	int speed; //variable
+	void accelerate() {//method body
+		
+	}
+	Vehicle(){ //Constructor, same name as class but no return type 
+		speed = 0;
+		
+	}
+}

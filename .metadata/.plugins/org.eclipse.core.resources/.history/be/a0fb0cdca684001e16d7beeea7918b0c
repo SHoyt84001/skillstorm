@@ -1,0 +1,63 @@
+package com.skillstorm.mathFunctions;
+
+import java.util.Scanner;
+
+public class AssignmentZodiac {
+	public static void main (String[] args) {
+		
+		
+		// Goal: output the following to console
+		// ello
+		// world
+		// o
+		// !
+		
+//		String helloWorld = "Hello world!";
+//		System.out.println(helloWorld);
+//		
+//		
+//		int elloPosition = helloWorld.indexOf("ello");
+//		String elloString = helloWorld.substring(elloPosition);
+//		
+//		int worldPosition = helloWorld.indexOf("world");
+//		int oPosition = helloWorld.indexOf("o");
+//		int exclaimPosition = helloWorld.indexOf("!");
+//		
+//		
+//		System.out.println(elloString);
+		
+		// Zodiac part
+		
+		String zodAnimals = 
+                "Monkey    " +
+                "Rooster   " +
+                "Dog       " +
+                "Pig       " +
+                "Rat       " +
+                "Ox        " +
+                "Tiger     " +
+                "Rabbit    " +
+                "Dragon    " +
+                "Snake     " +
+                "Horse     " +
+                "Goat      "
+                ;
+		
+		System.out.print("Please input your birth year: ");
+		
+		Scanner zodiacScan = new Scanner(System.in);
+		
+		int birthYear = zodiacScan.nextInt(); zodiacScan.nextLine();
+		int positionInList = birthYear % 12;
+		
+		System.out.println("This is your zodiac month: " + modYear);
+		
+		int startPositionInString = positionInList * 10;
+		int nextPositionInList = positionInList + 1;
+		int endPositionInString = nextPositionInList * 10;
+		
+		
+		zodiacScan.close(); 
+		
+	}
+}

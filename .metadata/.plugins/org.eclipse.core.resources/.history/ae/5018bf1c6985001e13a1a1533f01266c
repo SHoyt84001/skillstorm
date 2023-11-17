@@ -1,0 +1,8 @@
+package com.skillstorm.fridayProj;
+
+public class assignmentTable {
+	
+	public static void main(String[] args) {
+		
+	}
+}

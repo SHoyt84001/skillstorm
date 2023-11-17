@@ -1,0 +1,64 @@
+package com.skillstorm.typecast;
+
+public class arithmeticPractice {
+
+		public static void main (String[] args) {
+			
+			// This practice is to verify my hand-written work
+			
+			// Starting with USING REMAINDER OPERATOR
+			
+			// 5 + 7 % 6 = 6
+		
+			
+			double remainder1 = (5 + 7 % 6);
+			double remainder2 = (12 % 6);
+			double remainder3 = (6 % 12);
+			double remainder4 = (3 % 5);
+			double remainder5 = (5 % 3);
+			double remainder6 = (5 % 5);
+			double remainder7 = (1 % -2);
+			double remainder8 = (-1 % 2);
+			double remainder9 = (-1 % -2);
+			double remainder10 = (0 % 2);
+			// double remainder11 = (2 % 0); 
+			double remainder12 = (6 * 2 % 6); 
+			double remainder13 = (12 % 4); 
+			double remainder14 = (7 % 3 % 2);
+			
+			double[] remainders = new double[]{ remainder1, remainder2, remainder3, remainder4, remainder5, 
+					remainder6, remainder7, remainder8, remainder9, remainder10, remainder12, remainder13,
+					remainder14};
+			
+			System.out.println(remainders);
+			
+//			int order1 = (10 - 12 * 2);
+//			int order2 = (5 * (3 - 2)); 
+//			int order3 = (5 + 2 * 3);
+//			int order4 = (7 + 2 * 3 / 5 - 1);
+//			int order5 = (18 / 3 % 7 * (4 + 1));
+//			int intArith1 = (15 / 3 / 5); 
+//			int intArith2 = (1 / 2); 
+//			int intArith3 = (3 / 4);
+//			int intArith4 = (4 / 3);
+//			int intArith5 = (Integer.MAX_VALUE + 1);
+//			int intArith6 = (Integer.MIN_VALUE - 1);
+//			int intArith7 = (Integer.MAX_VALUE + Integer.MIN_VALUE);
+//			int intArith8 = (Short.MAX_VALUE + 1);
+//			int intArith9 = (Short.MIN_VALUE - 1); 
+//			int intArith10 = (Short.MAX_VALUE + Short.MIN_VALUE); 
+//			int typeCasting1 = ((int) 7.9 - 3); 
+//			int typeCasting2 = ((int) 84.3 / (int) 2.8); 
+//			int typeCasting3 = ((byte) 1000 - 10 ); 
+//			int typeCasting4 = ((short) 100000); 
+//			long typeCasting5 = ((long) 10 + (-10));
+//			
+//			System.out.println("All solutions for the problems: " + )
+//			
+//	
+//			System.out.println("This was my work: 5 + 7 % 6 = 6\n" + (5+7%6));
+//			2. 12 % 6 = 0
+//			3.  6 % 12 = 6
+//			4. 3 % 5 = 3
+		}
+}

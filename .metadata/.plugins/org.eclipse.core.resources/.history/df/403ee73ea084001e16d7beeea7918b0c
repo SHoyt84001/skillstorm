@@ -1,0 +1,28 @@
+package com.skillstorm.mathFunctions;
+
+public class AssignmentZodiac {
+	public static void main (String[] args) {
+		
+		
+		// Goal: output the following to console
+		// ello
+		// world
+		// o
+		// !
+		
+		String helloWorld = "Hello world!";
+		System.out.println(helloWorld);
+		
+		
+		int elloPosition = helloWorld.indexOf("ello");
+		String elloString = helloWorld.substring(elloPosition);
+		
+		int worldPosition = helloWorld.indexOf("world");
+		int oPosition = helloWorld.indexOf("o");
+		int exclaimPosition = helloWorld.indexOf("!");
+		
+		
+		System.out.println(elloString);
+		
+	}
+}

@@ -1,0 +1,16 @@
+package com.skillstorm.libs;
+
+import java.util.Scanner;
+
+public class MadLib {
+	public static void main(String[] args) {
+		
+		Scanner MadLibIn = new Scanner(System.in);
+		
+		System.out.println("Welcome to my version of MadLibs.");
+		
+		System.out.println("\nPlease give a noun: ");
+		
+		MadLibIn.close();
+	}
+}

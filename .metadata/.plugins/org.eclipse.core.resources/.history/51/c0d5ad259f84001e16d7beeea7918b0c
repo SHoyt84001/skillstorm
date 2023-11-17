@@ -1,0 +1,17 @@
+package com.skillstorm.mathFunctions;
+
+public class AssignmentZodiac {
+	public static void main (String[] args) {
+		
+		String helloWorld = "Hello world!";
+		String trimmedHello = helloWorld.trim();
+		System.out.println(helloWorld);
+		System.out.println(trimmedHello);
+		
+		
+		int elloPosition = trimmedHello.indexOf("ello");
+		int exclaimPosition = helloWorld.indexOf('!');
+		
+		
+	}
+}

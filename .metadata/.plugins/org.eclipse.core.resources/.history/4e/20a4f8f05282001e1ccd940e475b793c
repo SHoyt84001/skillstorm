@@ -1,0 +1,27 @@
+
+public class Arrays {
+
+	public static void main(String[] args) {
+		//define the size of the array 
+		//this is the new int [5] section
+		int[] numbers = new int[5];
+		numbers[0] = 144;
+		System.out.print(numbers[0]);
+		
+		//array initializer
+		//this is the curly brackets section with commas
+		String[] words = {"jerry", "smith", "charles"};
+		System.out.print(words[1]);
+		
+		
+		//using the array initializer method,
+		//we give the array a name,
+		//then we assign the values of 5, 21 and 178 to the first three
+		//positions of the array.
+		//finally we call the second position in the array with [1]
+		int[] moreNumbers = {5, 21, 178};
+		System.out.println(moreNumbers[1]);
+		
+	}
+	
+}

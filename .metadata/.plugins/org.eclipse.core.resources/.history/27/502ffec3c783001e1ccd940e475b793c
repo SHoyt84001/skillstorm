@@ -1,0 +1,10 @@
+package com.skillstorm.typecast;
+
+public class FunWChars {
+	
+	public static void main (String[] args) {
+		
+		int x = 'a' + 'b';
+		System.out.println((char) x);
+	}
+}

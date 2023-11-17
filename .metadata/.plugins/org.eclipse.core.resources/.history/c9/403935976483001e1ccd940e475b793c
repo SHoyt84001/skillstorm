@@ -1,0 +1,19 @@
+package com.skillstorm.typecast;
+
+public class typeCast {
+
+	public static void main (String[] args) {
+		
+		int isInt = 10; 
+		double isDouble = 1239.1481; 
+		
+		int changedFromDouble = (int)isDouble; 
+		double changedFromInt = isInt;
+		
+		System.out.println("This is the int: " + changedFromDouble);
+		
+		System.out.println("This in the double: " + changedFromInt);
+		
+		
+	}
+}

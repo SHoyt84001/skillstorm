@@ -1,0 +1,15 @@
+package com.skillstorm.fridayProj;
+
+public class DiceRoll {
+
+		public static void main (String[] args) {
+			
+			double diceRoll = Math.random() ;
+			
+			int diceRoll2 = (int) diceRoll * 10 + 1;
+			
+			System.out.println(diceRoll2);
+			
+			
+		}
+}

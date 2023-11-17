@@ -1,0 +1,51 @@
+package com.skillstorm.libs;
+
+import java.util.Scanner;
+
+public class MadLib {
+	public static void main(String[] args) {
+		
+		Scanner MadLibIn = new Scanner(System.in);
+		
+		System.out.println("Welcome to my version of MadLibs.");
+		
+		System.out.print("\nPlease give a noun: ");
+		
+		Byte noun = MadLibIn.nextByte();
+		
+		MadLibIn.nextLine();
+		
+		System.out.print("\nPlease give a number: ");
+		
+		int number = MadLibIn.nextInt();
+		
+//		System.out.print("\nPlease give yet another number: ");
+//		
+//		int number2 = MadLibIn.nextInt();
+		
+		System.out.print("\nPlease give a location: ");
+		
+		String location = MadLibIn.nextLine();
+		
+		System.out.print("\nPlease give an animal: ");
+		
+		String animal = MadLibIn.nextLine();
+		
+		System.out.print("\nPlease give another number: ");
+		
+		int amazedPopulace = MadLibIn.nextInt();
+		
+		MadLibIn.nextLine();
+		
+		System.out.println("\nExcellent! Let's make something horrible out of all of that!\n");
+		
+		System.out.println("The " + noun + " was launched " + number + " feet into the air by NASA research team in " 
+		+ location + ".\n" + "The town " + animal + " demonstrated great courage by being present during the test-flight.\n" 
+		+ "\nLocal news reports indicate that up to " 
+		+ amazedPopulace + " people are waiting in line to shake the hand of the brave " 
+		+ animal + " who dared to go where no " 
+		+ animal + " has gone before!");
+		
+		MadLibIn.close();
+	}
+}

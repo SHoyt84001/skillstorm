@@ -1,0 +1,18 @@
+package com.skillstorm.typecast;
+
+public class FunWChars {
+	
+	public static void main (String[] args) {
+		
+		int x = 'a' + 'b';
+		System.out.println((char) x);
+		
+		int eRotated = ((char) 'e' +2);
+		int rRotated = ((char) 'r' +2);
+		int iRotated = ((char) 'i' +2);
+		int cRotated = ((char) 'c' +2);
+		int aRotated = ((char) 'a' +2);
+		
+		System.out.println(" " + (char)eRotated + rRotated + iRotated + cRotated + aRotated);
+	}
+}

@@ -1,0 +1,11 @@
+package com.skillstorm.mathFunctions;
+
+public class AssignmentZodiac {
+	public static void main (String[] args) {
+		
+		String helloWorld = "Hello world!";
+		System.out.println(helloWorld.substring(1,5));
+		System.out.println(helloWorld.substring(6,11));
+		
+	}
+}

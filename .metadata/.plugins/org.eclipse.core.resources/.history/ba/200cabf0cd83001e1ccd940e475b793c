@@ -1,0 +1,18 @@
+package com.skillstorm.typecast;
+
+import java.util.Scanner;
+
+public class FunWChars {
+	
+	public static void main (String[] args) {
+		
+		Scanner decScan = new Scanner(System.in); 
+		
+		String encMessage = decScan.next();
+		
+		System.out.println(encMessage.charAt(0));
+		encMessage.toCharArray();
+		
+		decScan.close();
+	}
+}

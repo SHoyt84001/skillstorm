@@ -1,0 +1,21 @@
+package com.skillstorm.typecast;
+
+public class typeCast {
+
+	public static void main (String[] args) {
+		
+		int num = 10; 
+		
+		double data = num; 
+		
+		System.out.println("The double value: " + data);
+		
+		double num2 = 1239.1481; 
+		
+		int data2 = (int)num2; 
+		
+		System.out.println("The int value: " + data2);
+		
+		
+	}
+}

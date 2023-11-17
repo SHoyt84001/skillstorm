@@ -1,0 +1,34 @@
+package com.skillstorm.libs;
+
+import java.util.Scanner;
+
+public class MadLib {
+	public static void main(String[] args) {
+		
+		Scanner MadLibIn = new Scanner(System.in);
+		
+		System.out.println("Welcome to my version of MadLibs.");
+		
+		System.out.print("\nPlease give a noun: ");
+		
+		String noun = MadLibIn.nextLine();
+		
+		System.out.print("\nPlease give a number: ");
+		
+		int number = MadLibIn.nextInt();
+		
+		MadLibIn.nextLine();
+		
+		System.out.print("\nPlease give a location: ");
+		
+		String location = MadLibIn.nextLine();
+		
+		System.out.print("\nPlease give an animal: ");
+		
+		String animal = MadLibIn.nextLine();
+		
+		
+		
+		MadLibIn.close();
+	}
+}

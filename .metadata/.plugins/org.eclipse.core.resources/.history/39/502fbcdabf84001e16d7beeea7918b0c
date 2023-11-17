@@ -1,0 +1,16 @@
+package com.skillstorm.mathFunctions;
+
+import java.util.Scanner;
+
+public class SimpleInterest {
+	public static void main (String[] args) {
+		
+		// Simple Interest Calculator
+		// It needs to ask the user for their principal, rate (as a percentage), and the amount of time
+		// Print out the results with 2 decimal places
+		
+		System.out.println("Please provide your principal: ");
+		Scanner userPrincipal = new Scanner(System.in);
+		
+	}
+}

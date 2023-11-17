@@ -1,0 +1,47 @@
+package com.skillstorm.mathFunctions;
+
+import java.util.Scanner;
+
+class CompoundInterest{
+	public static void main (String[] args) {
+		// it needs to ask the user for the principal, interest rate, 
+		// number of times per year the interest is compounded, 
+		// and the time in years
+		
+		// A = P(1 + r/n)^nt
+		//
+		// A = Principal(amount) + Interest(amount)
+		// 
+		// 
+		
+		Scanner compScan = new Scanner(System.in);
+		
+		// Principal payment will be added to interest amount for Accrued
+		System.out.print("Please provide your principle payment. >");
+		double principal = compScan.nextDouble();
+		
+		System.out.print("Please provide your yearly interest rate. >");
+		double interestRate = compScan.nextDouble() / 100;
+		
+		System.out.print("How many years is your loan out for? >");
+		int years = compScan.nextInt();
+		
+		System.out.println("How many months is your loan out for? >");
+		double months = compScan.nextDouble();
+		
+		System.out.println("I don't know what compounding periods are, but what is yours? >");
+		double compoundP = compScan.nextDouble();
+		
+		double accruedAmt = principal * interestRate;
+		
+		double compoundAmt = Math.pow(accruedAmt * (1 + (interestRate / years)), (months * compoundP));
+		
+		System.out.print("\nThis should be your compound interest number: " + compoundAmt);
+		
+		
+		compScan.close();
+		
+		
+		
+	}
+}
