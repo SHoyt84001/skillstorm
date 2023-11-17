@@ -1,2 +1,2 @@
 # skillstorm
-This is for practicing repos
+This is for practicing and getting used to Git
