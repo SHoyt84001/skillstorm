@@ -1,0 +1,154 @@
+
+Using Remainder Operator
+
+1. 5 + 7 % 6 = 6
+	% is level 13
+	+ is level 11
+	modulus happens first: 7 % 6 = 1
+	addition happens next: 5 + 1 = 6
+
+2. 12 % 6 = 0
+	12 modulus 6 divides perfectly, so there is no remainder
+
+3.  6 % 12 = 6
+	6 cannot be divided by 12, so 6 remains
+
+4. 3 % 5 = 3
+	3 cannot be divided by 12, so 3 remains
+
+5. 5 % 3 = 2 
+	5 modulus 3 divides with 2 remaining
+
+6. 5 % 5 = 0 
+	5 modulus 5 divides perfectly, so no remainder
+
+7. 1 % -2 = 1
+	1 cannot be divided by 2, so 1 remains
+
+8. -1 % 2 = -1
+	1 cannot be divided by 2, and the left sign will be used, so 1 remains
+
+9. -1 % -2 = -1
+	i think the same as above happens, unless it cancels out
+	
+10. 0 % 2 = 0
+	zero cannot be divided
+
+//I GOT THIS ONE WRONG
+11. 2 % 0 = 2 
+	you cannot divide by zero, so 2 remains 
+
+12. 6 * 2 % 6 = 0
+	both * and % are level 12, but they are left-to-right associativity, so: 
+	6*2 = 12  
+	12 % 6 = 0
+			
+13. 12 % 4 = 0 
+	perfectly divides into 3, so no remainder
+
+14. 7 % 3 % 2 = 0
+	left-to-right associativity, so: 
+	7 % 3 = 4
+	4 % 2 = 0
+
+Order of Operations
+
+1. 10 - 12 * 2 = -14
+	* is lvl 12
+	- is lvl 11
+
+2. 5 * (3 - 2) = 5
+	() is lvl 16
+	* is lvl 12
+
+3. 5 + 2 * 3 = 11
+	* is lvl 12
+	+ is lvl 11
+
+4. 7 + 2 * 3 / 5 - 1 = 7.2? will it fail because it's a float?
+
+	2*3 = 6
+	6 / 5 = 1.2
+	7 + 1.2 = 8.2
+	8.2 - 1 = 7.2
+	* is lvl 12 AND / is lvl 12, multi is first, left-to-right
+	+ is lvl 11 AND - is lvl 11, addition is first, left-to-right associativity
+
+5. 18 / 3 % 7 * (4 + 1) = 6
+	4 + 1 = 5
+	7 * 5 = 35
+	18 / 3 = 6
+	6 % 36 = 6
+
+	lvl 16: ()
+	lvl 12: order is: * / % 
+	lvl 11: +	
+
+Integer Arthimetic
+
+1. 15 / 3 / 5 = 1
+	left-to-right associativity
+	15 / 3 = 5
+	5 / 5 = 1
+
+2. 1 / 2 = i think it'll fail because it's a float? 
+	
+3. 3 / 4 = same as above
+	
+4. 4 / 3 = 1
+	might be the same as above, but at least 3 can go into 4 once
+
+5. Integer.MAX_VALUE + 1 = -2,147,483,647
+	2's compliment rules kick in, flipping all of the bits, meaning the value is negative
+	
+6. Integer.MIN_VALUE - 1 = 2,147,483,648 
+	2's compliment rules kick in, flipping all of the bits, meaning the value is positive
+	
+7. Integer.MAX_VALUE + Integer.MIN_VALUE = 1?
+	left sign is kept, i think it should be -1 traditionally
+	
+8. Short.MAX_VALUE + 1 = -32,768
+	same as integer.MAX_VALUE + 1
+
+9. Short.MIN_VALUE - 1 = -32,768
+	same as integer.MIN_VALUE - 1 
+
+10. Short.MAX_VALUE + Short.MIN_VALUE = 1
+	same as #7 
+
+TYPE CASTING
+
+Widening Casting (automatically) - converting a smaller type to a larger type size
+byte -> short -> char -> int -> long -> float -> double
+
+Narrowing Casting (manually) - converting a larger type to a smaller size type
+double -> float -> long -> int -> char -> short -> byte
+
+1. (int) 7.9 - 3 = 4.9
+	must widecast int 3 to float or double for this to work
+	int x = 3
+	double y = 7.9
+	double z = x
+	y - z = 4.9
+ 
+2. (int) 84.3 / (int) 2.8 = 
+	must widecast to float or double for this to work
+	int x = 84.3
+	int y = 2.8
+	double a = x
+	double b = y
+	a / y = whatever number that is
+
+3. (byte) 1000 - 10 = 990
+	error, byte holds -128 to 127, must widecast to int
+	byte x = 1000
+	int y = 10
+	int z = x
+
+4. (short) 100000 = int 100,000
+	error, short holds -32,768 to 32,767, must widecast to int
+	int x = 100,000
+	
+5. (long) 10 + -10 = int 0 
+	the scope is far too large, so narrowing would be smart, to int at least
+	
