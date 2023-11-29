@@ -43,6 +43,9 @@ public class GroupWork {
 	public static String challenge1(String[] str) {
 		// YOUR CODE HERE 
 		String helloString = "hello";
+		helloString.valueOf(0);
+		helloString.valueOf('e');
+		
 		String newString = ""; 
 		
 		char ch; 
