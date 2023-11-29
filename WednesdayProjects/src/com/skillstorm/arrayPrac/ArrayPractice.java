@@ -52,6 +52,7 @@ public class ArrayPractice {
 		int[] test4 = null;
 		System.out.print("\nHere is your last element: " + getLastElement(test4));
 		
+		
 	}
 
 	public static int getLastElement(int[] array) {
@@ -66,5 +67,5 @@ public class ArrayPractice {
 		return array[lastPos];
 
 	}
-
+	
 }
