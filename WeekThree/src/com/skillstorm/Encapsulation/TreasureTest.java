@@ -22,8 +22,6 @@ public class TreasureTest {
 		
 		System.out.println(emptyTreasure.getContents());
 		
-		
-		
 		for (Treasure item : treasureBox.getContents()) {
 			System.out.println("Here's your treasure!" + " " + item);
 		}

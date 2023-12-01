@@ -18,7 +18,7 @@ public class TreasureChest {
     
     // TODO add no-args and all-args constructors
     
-    public TreasureChest() { }
+    public TreasureChest() {}
     
     public TreasureChest(double weightInLbs, double height, double length, 
     		double width, boolean isLocked, Treasure... contents) {
@@ -114,10 +114,12 @@ public class TreasureChest {
 	
     // TODO add toString method
 	
+	//The 16.0" x 18.0" x 24" treasure chest weighs 25.0lbs and is locked.
+	
 	@Override
 	public String toString() {
 		if (isLocked == false) {
-			return "TreasureChest [weightInLbs=" + weightInLbs + ", height=" + height + ", length=" + length + ", width="
+			return String.format("The dimensions are: %,.2f" , weightInLbs) + ", height=" + height + ", length=" + length + ", width="
 					+ width + ", isLocked=" + isLocked + ", contents=" + Arrays.toString(contents) + ", MAX_CONTENTS="
 					+ MAX_CONTENTS + "]";
 		} return "You don't get to look inside here, but here's some useless details: " 
