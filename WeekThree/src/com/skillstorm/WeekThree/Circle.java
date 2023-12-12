@@ -21,10 +21,22 @@ public class Circle {
 	}
 	
 	
-	public Circle(double radius) {
+	public Circle(double radius) throws InvalidSizeException {
 		this();
+		if(radius < 0 ) {
+			throw new InvalidSizeException("Radius cannot be negative");
+		}
 		this.radius = radius;
 	}
+
+
+	public void setRadius(double radius) throws InvalidSizeException{
+		if(radius < 0 ) {
+			throw new InvalidSizeException("Radius cannot be negative");
+		}
+		this.radius = radius;
+	}
+
 	
 	public double diameter() {
 		return diameter = radius * 2;
@@ -42,6 +54,11 @@ public class Circle {
 		return Math.PI * (radius * radius);
 	}
 	
+	
+	public double getRadius() {
+		return radius;
+	}
+
 	public boolean checkCircles(Circle circleOne, Circle circleTwo) {
 		
 		boolean isSame = false;
@@ -52,4 +69,12 @@ public class Circle {
 			
 		return isSame;
 	}
+
+	@Override
+	public String toString() {
+		return "Circle [center=" + center + ", radius=" + radius + ", diameter=" + diameter + ", perimeter=" + perimeter
+				+ ", circumference=" + circumference + ", area=" + area + "]";
+	}
+	
+	
 }

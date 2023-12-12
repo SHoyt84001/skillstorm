@@ -1,8 +1,10 @@
 package com.skillstorm.Main;
 
+import java.util.*;
 import com.skillstorm.PlayerClass.Player;
+import com.skillstorm.Scene.*;
 
-public class ProjectMain extends Player{
+public class ProjectMain{
 	
 	public static void main(String[] args) {
 		/**
@@ -36,12 +38,8 @@ public class ProjectMain extends Player{
 		 *    4.4 
 		 */
 		
-		System.out.println("Welcome to the game!");
-		
-		Player player1 = new Player();
-		
-		System.out.println(player1.toString());
-		
-		
+		Scanner userIn = new Scanner(System.in);
+		Scene firstScene = new Scene(userIn);
+		firstScene.gameStart();
 	}
 }
