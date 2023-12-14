@@ -7,7 +7,6 @@ public class Test1 extends Car{
 	
 	public static void main(String[] args) {
 		Car car1 = new Car();
-		car1.driveFast();
 		System.out.println(car1);
 	}	
 }
