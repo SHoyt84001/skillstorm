@@ -1,9 +1,19 @@
 package com.skillstorm.weekFivePractices;
 
-import com.skillstorm.GroupWorkStudent.*;
-
 public class WrapperPractice {
-	int sum( int array []) {
+	public static void main(String[] args) {
+	
+		int x = 0;
 		
+		switch(x) {
+		case 0: 
+			System.out.println(0);
+			break;
+		default: 
+			System.out.println("default");
+			break;
+		case -1: System.out.println(-1);
+		case 1: System.out.println(1);
+		}
 	}
 }

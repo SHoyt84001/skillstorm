@@ -13,7 +13,7 @@ public class SaveLoad {
 	}
 	
 	public Player getPlayer() {
-		return player;
+		return this.player;
 	}
 
 	public void setPlayer(Player player) {
@@ -35,7 +35,6 @@ public class SaveLoad {
 			fileOut.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		}
 	}
 	

@@ -1,6 +1,5 @@
 INDEX VERSION 1.134+C:\Users\artwa\Workspace\.metadata\.plugins\org.eclipse.jdt.core
-712673515.index
 1399779771.index
-1865797976.index
-2698546777.index
 4280113933.index
+712673515.index
+1865797976.index

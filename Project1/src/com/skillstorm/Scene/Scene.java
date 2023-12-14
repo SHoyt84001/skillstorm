@@ -1,6 +1,11 @@
 package com.skillstorm.Scene;
 
 import java.lang.reflect.Array;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.*;
 import com.skillstorm.projectData.*;
 import com.skillstorm.PlayerClass.*;
@@ -56,11 +61,28 @@ public class Scene {
 		
 		
 		try {
-			SaveLoad load = new SaveLoad(this.player);
-			load.load();
-			this.player = load.getPlayer();
+			String filePath = "testSave.dat";
+	        Path path = Paths.get(filePath);
+
+	        // Check if the file exists
+	        if (Files.exists(path)) {
+	        	
+	            // Check if the file is readable
+	            boolean isReadable = Files.isReadable(path);
+	            if(isReadable == true) {
+	            SaveLoad load = new SaveLoad(new Player());
+	    		load.load();
+	    		this.player = load.getPlayer();
+	            } else this.player = new Player();
+	            System.out.println(this.player);
+	        } else {
+	            this.player = new Player();
+	            System.out.println(this.player);
+	        }
+	      
 		} catch (Exception e) {
 			this.player = new Player();
+			System.out.println(this.player);
 		}
 		
 		System.out.println("You wake to see a screen in front of you displaying a question.");
@@ -84,10 +106,14 @@ public class Scene {
 		String firstChoice = userIn.nextLine().toLowerCase();
 		
 			switch (firstChoice) {
-			case "corrupt", "corrupted":
+			case "corrupt":
 				handleCorruptionChoice();
 				handleFitToMove();
 				break;
+			case "corrupted":
+				handleCorruptionChoice();
+			handleFitToMove();
+			break;
 			case "tired":
 				System.out.println("\nYOU ARE TIRED.");
 				handleFitToMove();
@@ -102,10 +128,14 @@ public class Scene {
 		String secondChoice = userIn.nextLine().trim().toLowerCase();
 		
 		switch (secondChoice) {
-		case "corrupt", "corrupted":
+		case "corrupt":
 			handleCorruptionChoice();
 			handleExitModule();
 			break;
+		case "corrupted":
+			handleCorruptionChoice();
+		handleExitModule();
+		break;
 		case "yes":
 			handleExitModule();
 			break;
@@ -118,12 +148,18 @@ public class Scene {
 		String thirdChoice = userIn.nextLine().trim().toLowerCase();
 		
 		switch (thirdChoice) {
-		case "corrupt", "corrupted":
+		case "corrupt":
 			handleCorruptionChoice();
 			break;
-		case "exit", "yes":
+		case "corrupted":
+			handleCorruptionChoice();
+		break;
+		case "yes":
 			handleExitDescription();
 			break;
+		case "exit":
+			handleExitDescription();
+		break;
 		default: 
 			handleExitDescription();
 			break;
@@ -152,6 +188,7 @@ public class Scene {
 		System.out.println("The screen in front of you fades to black and the door of the capsule lifts.");
 		System.out.println("As the door clicks into place above you, the echoes reveal a small, dark room.");
 	}
+	
 	public void sceneRoomOne(Player player) {
 		String description = "You exit the module to the dark room."
 				+ "\nAt the other end of the room, you see a sparking control panel.";
@@ -194,30 +231,32 @@ public class Scene {
 		
 		String bioError = "\nB I O M E T R I C E R R O R";
 		String bioFixed = "\nB I O M E T R I C I N P U T";
+		boolean switchFlipped = false;
 		
 		System.out.println("The panel is hanging by a wire going into the wall.");
 		System.out.println("\nIts screen flickers a message: ");		
 		System.out.println("\nA U T H E N T I C A T E U S E R");
-		System.out.println(bioError);
+		if (switchFlipped = false) {
+			System.out.println(bioError);
+		} else if (switchFlipped = true)
+			System.out.println(bioFixed);
 		
 		String[] panelOptions = {"1. Place hand on panel", "2. Flip panel over", "3. Go back"};
 		
 		System.out.println(Arrays.toString(panelOptions));
 		String panelChoice = sanitizeInput(userIn.nextLine());
 		
-		boolean hasFlipped = false;
+		
 		
 		if (panelChoice.equalsIgnoreCase("flip panel over") || panelChoice.equalsIgnoreCase("flip") || panelChoice.equalsIgnoreCase("2")) {
 			System.out.println("\nFlipping the panel over, you see a red switch.");
-			String[] switchOptions = {"1. Press red switch", "2. Go back"};
-			System.out.println(Arrays.toString(switchOptions));
-			String switchChoice = sanitizeInput(userIn.nextLine());
 			
-			if (switchChoice.equals("1") || switchChoice.equalsIgnoreCase("press red switch") || switchChoice.equalsIgnoreCase("press")) {
-				System.out.println("*the panel makes a chirping sound*");
-				System.out.println(Arrays.toString(switchOptions));
-				
-			}
+			
+//			if (switchChoice.equals("1") || switchChoice.equalsIgnoreCase("press red switch") || switchChoice.equalsIgnoreCase("press")) {
+//				System.out.println("*the panel makes a chirping sound*");
+//				System.out.println(Arrays.toString(switchOptions));
+//				
+//			}
 		} else if (panelChoice.equals("1") || panelChoice.equalsIgnoreCase("place hand") || panelChoice.equalsIgnoreCase("place hand on panel")) {
 			System.out.println("Nothing seems to happen.");
 		} else if(panelChoice.equalsIgnoreCase("3") || panelChoice.equalsIgnoreCase("go back") || panelChoice.equalsIgnoreCase("back")) {
@@ -225,6 +264,13 @@ public class Scene {
 		}
 	}
 	
+	public void handleRedSwitch() {
+		String[] switchOptions = {"1. Press red switch", "2. Go back"};
+		System.out.println(Arrays.toString(switchOptions));
+		String switchChoice = sanitizeInput(userIn.nextLine());
+		
+		
+	}
 	
 	//////////////////// PROMPT USER TO PLAY AGAIN ////////////
 	
@@ -275,17 +321,34 @@ public class Scene {
 			System.out.println("Thanks for playing!");
 			SaveLoad save = new SaveLoad(this.player);
 			save.save();
-		} 
-		
-		else gameStart();
+		} else {
+			SaveLoad save = new SaveLoad(this.player);
+			save.save();
+			gameStart();
+		}
 	}
 	
 	public void winTrigger() {
+		winCount++;
+		System.out.println("C O R R U P T I O N C L E A N S E D");
+		System.out.println("\nDo you want to play again? yes/no: "); 
 		
+		String playAgain = userIn.nextLine().trim().toLowerCase();
+		  
+		if (!playAgain.equals("yes")){ 
+			System.out.println("Thanks for playing!");
+			SaveLoad save = new SaveLoad(this.player);
+			save.save();
+		} else {
+			SaveLoad save = new SaveLoad(this.player);
+			save.save();
+			gameStart();
+		}
 	}
 	
 	public void winLoseCount() {
 		System.out.printf("You have played %s games", (loseCount + winCount));
+		
 	}
 	
 	

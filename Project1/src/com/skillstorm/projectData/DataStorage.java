@@ -12,5 +12,4 @@ public class DataStorage implements Serializable{
 	int stamina; 
 	int EXP; 
 	int score;
-
 }

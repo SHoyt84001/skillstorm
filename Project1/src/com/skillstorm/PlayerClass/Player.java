@@ -1,4 +1,5 @@
 package com.skillstorm.PlayerClass;
+
 import java.io.*;
 import java.util.Random;
 
@@ -12,6 +13,8 @@ public class Player implements Serializable {
 	private boolean isAlive;
 	private int EXP; 
 	private int score;
+	private int winCount;
+	private int loseCount;
 
 	
 	public Player() {
@@ -61,7 +64,6 @@ public class Player implements Serializable {
 		this.setHitPoints(hitPoints - reduction);
 		System.out.println("You suddenly feel nauseated. HP down.");
 		}
-	
 }
 	
 	
@@ -142,6 +144,4 @@ public class Player implements Serializable {
 	+ "\nExperience: " + EXP
 	+ "\nScore: " + score);
 	}
-	
-	
 }

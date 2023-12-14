@@ -7,7 +7,9 @@
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="com.skillstorm.WeekThree.InvalidSizeException"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="com.skillstorm.PlayerClass.Player"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+    <fullyQualifiedTypeName name="com.skillstorm.GroupWorkStudent.Student"/>
+    <fullyQualifiedTypeName name="com.skillstorm.PlayerClass.Player"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
 </qualifiedTypeNameHistroy>
