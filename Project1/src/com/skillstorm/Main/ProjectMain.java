@@ -1,8 +1,11 @@
 package com.skillstorm.Main;
 
 import java.util.*;
+import com.skillstorm.projectData.*;
 import com.skillstorm.PlayerClass.Player;
 import com.skillstorm.Scene.*;
+
+
 
 public class ProjectMain{
 	
@@ -38,8 +41,17 @@ public class ProjectMain{
 		 *    4.4 
 		 */
 		
+		Player player1 = new Player();
+		System.out.println("Welcome to the game. \n\n" + player1 + "\n");
+		
+		// Starting the initial game "screen"
 		Scanner userIn = new Scanner(System.in);
-		Scene firstScene = new Scene(userIn);
-		firstScene.gameStart();
+		
+		Scene startScene = new Scene(userIn, player1);
+		startScene.gameStart();
+		
+		Scene roomOneScene = new Scene(userIn, player1);
+		roomOneScene.sceneRoomOne(player1);
+		
 	}
 }

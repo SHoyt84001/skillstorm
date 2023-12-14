@@ -1,0 +1,24 @@
+package com.skillstorm.projectData;
+
+import com.skillstorm.PlayerClass.Player;
+
+public class TestTest {
+	
+	public static void testSave() {
+		Player player1 = new Player("Half", 120, 5, 12, 55, 10);
+		SaveLoad save = new SaveLoad(player1);
+		save.save();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("It's working");
+		testSave();
+		testLoad();
+	}
+	
+	public static void testLoad() {
+		SaveLoad save = new SaveLoad(new Player());
+		save.load();
+		System.out.println(save.player);
+	}
+}

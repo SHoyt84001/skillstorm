@@ -2,13 +2,17 @@ package com.skillstorm.Scene;
 
 import java.lang.reflect.Array;
 import java.util.*;
-
+import com.skillstorm.projectData.*;
 import com.skillstorm.PlayerClass.*;
 
 
 public class Scene {
 	
 	//////////////////////// LOCAL VARIABLES ////////////////////////
+	private int winCount = 0;
+	private int loseCount = 0;
+	
+	private Player player;
 	private Scanner userIn;
 	private String description; 
 	private String userPrompt;
@@ -23,15 +27,17 @@ public class Scene {
 	
 	public Scene() {}
 	
-	public Scene(Scanner userIn) {
+	public Scene(Scanner userIn, Player player) {
 		this.userIn = userIn;
+		this.player = player;
 	}
 	
-	public Scene(String description, String userPrompt, String[] promptOptions, int points) {
+	public Scene(String description, String userPrompt, String[] promptOptions, int points, Player player) {
 		this.description = description;
 		this.userPrompt = userPrompt;
 		this.promptOptions = promptOptions;
 		this.points = points; 
+		this.player = player;
 	}
 
 	//////////////////////// GETTERS AND SETTERS ////////////////////////
@@ -47,130 +53,194 @@ public class Scene {
 	//////////////////////// SCENE STARTER ////////////////////////
 	
 	public void gameStart() {
-		do {
-			Player player1 = new Player();
-			System.out.println("You wake to see a screen in front of you displaying a question.");
-			System.out.println("\nPLEASE SELECT FROM THE FOLLOWING OPTIONS");
-			System.out.println("\nHOW DO YOU FEEL");
-			System.out.println("***CORRUPT***");
-			System.out.println("***TIRED***");
-			System.out.println("***CORRUPTED***");
-			
-			
-			/*
-			 * The reason why I'm not going for this simpler if statement is that I
-			 * specifically target "corrupt" and "corrupted" as a part of the game vision.
-			 * If I had just passed stat reducer on any other answer than "tired", then
-			 * non-corrupt-related game-endings would require different logic anyways
-			 * 
-			 * if (!firstChoice.toLowerCase().trim().equals("tired")) {
-			 * player1.statReducer(); }
-			 */
-			String firstChoice = userIn.nextLine().toLowerCase();
-			do {
-				
-				switch (firstChoice) {
-				case "corrupt":
-					player1.statReducer();
-					break;
-				case "corrupted":
-					player1.statReducer();
-					break;
-				case "tired":
-					System.out.println("\nYOU ARE TIRED. ARE YOU FIT TO MOVE ABOUT?");
-					System.out.println("YES");
-					System.out.println("***CORRUPTED***");
-					System.out.println("***CORRUPT***");
-					break;
-				default: 
-					System.out.println("C O R R U P T I O N.");
-					break;
-				}
-			} while (!firstChoice.equalsIgnoreCase("corrupt") && !firstChoice.equalsIgnoreCase("corrupted") && !firstChoice.equalsIgnoreCase("tired"));
-				
-			String secondChoice = userIn.nextLine().trim().toLowerCase();
-			
-			switch (secondChoice) {
-			case "corrupt":
-				player1.statReducer();
+		
+		
+		try {
+			SaveLoad load = new SaveLoad(this.player);
+			load.load();
+			this.player = load.getPlayer();
+		} catch (Exception e) {
+			this.player = new Player();
+		}
+		
+		System.out.println("You wake to see a screen in front of you displaying a question.");
+		System.out.println("\nPLEASE SELECT FROM THE FOLLOWING OPTIONS");
+		System.out.println("\nHOW DO YOU FEEL");
+		System.out.println("***CORRUPT***");
+		System.out.println("***TIRED***");
+		System.out.println("***CORRUPTED***");
+		
+		
+		/*
+		 * The reason why I'm not going for this simpler if statement is that I
+		 * specifically target "corrupt" and "corrupted" as a part of the game vision.
+		 * If I had just passed stat reducer on any other answer than "tired", then
+		 * non-corrupt-related game-endings would require different logic anyways
+		 * 
+		 * if (!firstChoice.toLowerCase().trim().equals("tired")) {
+		 * player.statReducer(); }
+		 */
+		
+		String firstChoice = userIn.nextLine().toLowerCase();
+		
+			switch (firstChoice) {
+			case "corrupt", "corrupted":
+				handleCorruptionChoice();
+				handleFitToMove();
 				break;
-			case "corrupted":
-				player1.statReducer();
-				break;
-			case "yes":
-				System.out.println("\nUSER IS FIT. EXIT LIFE SUPPORT MODULE?");
-				System.out.println("***CORRUPTED***");
-				System.out.println("***CORRUPT***");
-				System.out.println("***EXIT***");
-				break;
-			default:
-				System.out.println("C O R R U P T I O N.");
-				break;
-			}
-			
-			String thirdChoice = userIn.nextLine().trim().toLowerCase();
-			
-			switch (thirdChoice) {
-			case "corrupt":
-				player1.statReducer();
-				break;
-			case "corrupted":
-				player1.statReducer();
-				break;
-			case "exit":
-				System.out.println("\nEXITING MODULE. STANDBY.");
-				System.out.println("A sudden rush of humid air fills the small space you are in.");
-				System.out.println("The screen in front of you fades to black and the door of the capsule lifts.");
-				System.out.println("As the door clicks into place above you, the echoes reveal a small, dark room.");
+			case "tired":
+				System.out.println("\nYOU ARE TIRED.");
+				handleFitToMove();
 				break;
 			default: 
-				System.out.println("C O R R U P T I O N.");
-				break;
-			} 
-			
-			System.out.println("Do you want to play again? yes/no: ");
-			String playAgain = userIn.nextLine().trim().toLowerCase();
-			
-			if (!playAgain.equals("yes")){
-				System.out.println("Thanks for playing!");
+				System.out.println("\nC O R R U P T I O N");
+				handleFitToMove();
 				break;
 			}
-		} while(true);
+
+			
+		String secondChoice = userIn.nextLine().trim().toLowerCase();
 		
-}
-	
-	public void sceneOne(Player player) {
-		String description = "You exit the module to the dark room. "
-				+ "\nAt the other end of the room, you see a sparking control panel.";
-		String userPrompt = "\nWhat do you do?";
-		String[] promptOptions = {"Examine the control panel", "Look around", "Try the door"};
-		int points = 10;
+		switch (secondChoice) {
+		case "corrupt", "corrupted":
+			handleCorruptionChoice();
+			handleExitModule();
+			break;
+		case "yes":
+			handleExitModule();
+			break;
+		default:
+			System.out.println("\nC O R R U P T I O N");
+			handleExitModule();
+			break;
+		}
 		
-		Scene sceneOne = new Scene(description, userPrompt, promptOptions, points);
+		String thirdChoice = userIn.nextLine().trim().toLowerCase();
 		
-		Scanner playerIn = new Scanner(System.in);
-		System.out.println(description);
-		
-		String choice = sanitizeInput(playerIn.nextLine());
-		
-		
-		// i want to make a switch case that looks for player input and gives the result
-		// ideally i want all cases to include all possible scenes and results
-		
-		
-		// checking player input for wincondition
-		if (choice.equalsIgnoreCase("win") || choice.equalsIgnoreCase("press the button") || choice.equalsIgnoreCase("button")) {
-			System.out.println("Congratulations! Here's 10 points.");
-			player.increaseScore(points);
-		} else {
-			System.out.println("You lose.");
+		switch (thirdChoice) {
+		case "corrupt", "corrupted":
+			handleCorruptionChoice();
+			break;
+		case "exit", "yes":
+			handleExitDescription();
+			break;
+		default: 
+			handleExitDescription();
+			break;
 		}
 	}
+	
+	public void handleExitModule() {
+		System.out.println("\nUSER IS FIT. EXIT LIFE SUPPORT MODULE?");
+		System.out.println("***CORRUPTED***");
+		System.out.println("***CORRUPT***");
+		System.out.println("***EXIT***");
+	}
+	public void handleFitToMove() {
+		System.out.println("\nARE YOU FIT TO MOVE ABOUT?");
+		System.out.println("YES");
+		System.out.println("***CORRUPTED***");
+		System.out.println("***CORRUPT***");
+	}
+	public void handleCorruptionChoice() {
+		player.statReducer();
+		System.out.println("\nC O R R U P T I O N");
+	}
+	public void handleExitDescription() {
+		System.out.println("\nEXITING MODULE. STANDBY.");
+		System.out.println("A sudden rush of humid air fills the small space you are in.");
+		System.out.println("The screen in front of you fades to black and the door of the capsule lifts.");
+		System.out.println("As the door clicks into place above you, the echoes reveal a small, dark room.");
+	}
+	public void sceneRoomOne(Player player) {
+		String description = "You exit the module to the dark room."
+				+ "\nAt the other end of the room, you see a sparking control panel.";
+		String userPrompt = "\nWhat do you do?";
+		String[] promptOptions = {"1. Examine the control panel", "2. Look around", "3. Try the door"};
+		int points = 10;
+		
+		Scene sceneOne = new Scene(description, userPrompt, promptOptions, points, this.player);
+		
+		System.out.println(description);
+		System.out.println(userPrompt);
+		System.out.println(Arrays.toString(promptOptions));
+		
+		String choice = sanitizeInput(userIn.nextLine());
+		
+		if (choice.equalsIgnoreCase("Examine") || choice.equalsIgnoreCase("1") || choice.equalsIgnoreCase("panel")) {
+			examinePanel();
+			
+		} else if (choice.equalsIgnoreCase("Look around") || choice.equalsIgnoreCase("2")) {
+			System.out.println("The room is dark, but the broken panel lights the area near it.");
+			System.out.println("'\nA door is illuminated faintly next to the panel. It has no handles or obvious hold points.");
+		} else if(choice.equalsIgnoreCase("touch door")) {
+			loseTrigger();
+			winLoseCount();
+		}
+	}
+	
+	
+	
+	// What I want to happen: 
+	// 1. User either flips the panel or touches panel
+	// 2. if user touches panel without flipping panel and activating a switch, nothing happens
+	// 3. if user flips the panel, they see a switch and are asked to flip it
+	// 4. 
+	
+	/////////////////////// EXAMINE PANEL METHOD //////////////////
+	public void examinePanel() {
+		// I'd like to set these strings, and once the user has flipped the red switch, for bioFixed to be 
+		// placed where bioError is and get printed when i call the examinePanel method in the if statement
+		
+		String bioError = "\nB I O M E T R I C E R R O R";
+		String bioFixed = "\nB I O M E T R I C I N P U T";
+		
+		System.out.println("The panel is hanging by a wire going into the wall.");
+		System.out.println("\nIts screen flickers a message: ");		
+		System.out.println("\nA U T H E N T I C A T E U S E R");
+		System.out.println(bioError);
+		
+		String[] panelOptions = {"1. Place hand on panel", "2. Flip panel over", "3. Go back"};
+		
+		System.out.println(Arrays.toString(panelOptions));
+		String panelChoice = sanitizeInput(userIn.nextLine());
+		
+		boolean hasFlipped = false;
+		
+		if (panelChoice.equalsIgnoreCase("flip panel over") || panelChoice.equalsIgnoreCase("flip") || panelChoice.equalsIgnoreCase("2")) {
+			System.out.println("\nFlipping the panel over, you see a red switch.");
+			String[] switchOptions = {"1. Press red switch", "2. Go back"};
+			System.out.println(Arrays.toString(switchOptions));
+			String switchChoice = sanitizeInput(userIn.nextLine());
+			
+			if (switchChoice.equals("1") || switchChoice.equalsIgnoreCase("press red switch") || switchChoice.equalsIgnoreCase("press")) {
+				System.out.println("*the panel makes a chirping sound*");
+				System.out.println(Arrays.toString(switchOptions));
+				
+			}
+		} else if (panelChoice.equals("1") || panelChoice.equalsIgnoreCase("place hand") || panelChoice.equalsIgnoreCase("place hand on panel")) {
+			System.out.println("Nothing seems to happen.");
+		} else if(panelChoice.equalsIgnoreCase("3") || panelChoice.equalsIgnoreCase("go back") || panelChoice.equalsIgnoreCase("back")) {
+			examinePanel();
+		}
+	}
+	
+	
+	//////////////////// PROMPT USER TO PLAY AGAIN ////////////
+	
+	/*
+	 * System.out.println("Do you want to play again? yes/no: "); String playAgain =
+	 * userIn.nextLine().trim().toLowerCase();
+	 * 
+	 * if (!playAgain.equals("yes")){ System.out.println("Thanks for playing!");
+	 * break; }
+	 */
+	
 	
 	///////////////// RANDOM STAT REDUCER /////////////////
 	public void statReducer() {
 		// use getters to create an array of stats
-		int[] stat = {Player.getSTR(), Player.getSTA(), Player.getHP()};
+		int[] stat = {player.getSTR(), player.getSTA(), player.getHP()};
 		// create a new object of the random utility
 		Random random = new Random();
 		// select a random index in the array above between 1 and the 
@@ -181,20 +251,49 @@ public class Scene {
 		
 		int reduction = random.nextInt(10) + 1;
 		
-		if(selectedStat == Player.getSTR()) {
-			Player.setStrength(Player.getSTR() - reduction);
-		} else if(selectedStat == Player.getSTA()) {
-			Player.setStamina(Player.getSTA() - reduction);
-		} else if(selectedStat == Player.getHP()) {
-			Player.setHitPoints(Player.getHP() - reduction);
+		if(selectedStat == player.getSTR()) {
+			player.setStrength(player.getSTR() - reduction);
+		} else if(selectedStat == player.getSTA()) {
+			player.setStamina(player.getSTA() - reduction);
+		} else if(selectedStat == player.getHP()) {
+			player.setHitPoints(player.getHP() - reduction);
 		}
 	}
+	
+	///////////////// CHECKING FOR WIN/LOSE and KEEP TRACK /////////////
+	
+	
+	public void loseTrigger() {
+		loseCount++;
+		
+		System.out.println("T H E C O R R U P T I O N T A K E S Y O U");
+		System.out.println("\nDo you want to play again? yes/no: "); 
+		
+		String playAgain = userIn.nextLine().trim().toLowerCase();
+				  
+		if (!playAgain.equals("yes")){ 
+			System.out.println("Thanks for playing!");
+			SaveLoad save = new SaveLoad(this.player);
+			save.save();
+		} 
+		
+		else gameStart();
+	}
+	
+	public void winTrigger() {
+		
+	}
+	
+	public void winLoseCount() {
+		System.out.printf("You have played %s games", (loseCount + winCount));
+	}
+	
 	
 	
 	///////////////// SWITCH CASE FOR CORRUPT ///////////////
 	
 	public String handleChoice(String choice) {
-		switch(choice.toLowerCase()) {
+		switch(choice.toLowerCase().trim()) {
 			case "corrupt":
 				System.out.println("\"You suddenly feel nauseated\"");
 				statReducer();
@@ -207,6 +306,6 @@ public class Scene {
 	
 	/////////////// SANITIZE INPUT ////////////////////
 	public String sanitizeInput(String input) {
-		return input.trim();
+		return input.trim().toLowerCase();
 	}
 }

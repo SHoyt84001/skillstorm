@@ -6,9 +6,9 @@ public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
-	private static int hitPoints; 
-	private static int strength; 
-	private static int stamina; 
+	private int hitPoints; 
+	private int strength; 
+	private int stamina; 
 	private boolean isAlive;
 	private int EXP; 
 	private int score;
@@ -23,13 +23,24 @@ public class Player implements Serializable {
 		this.score = 0;
 	}
 	
+	public Player(String name, int hitPoints, int strength, int stamina, int EXP, int score) {
+		this.name = name;
+		this.hitPoints = hitPoints; 
+		this.strength = strength; 
+		this.stamina = stamina;
+		this.EXP = EXP; 
+		this.score = score;
+	}
+	
+	
+	
 	public void increaseScore(int points) {
 		score += points;
 	}
 	
 	public void statReducer() {
 		// use getters to create an array of stats
-		int[] stat = {Player.strength, Player.stamina, Player.hitPoints};
+		int[] stat = {this.strength, this.stamina, this.hitPoints};
 		// create a new object of the random utility
 		Random random = new Random();
 		// select a random index in the array above between 1 and the 
@@ -41,13 +52,13 @@ public class Player implements Serializable {
 		int reduction = random.nextInt(10) + 1;
 		
 		if(selectedStat == strength) {
-		Player.setStrength(strength - reduction);
+		this.setStrength(strength - reduction);
 		System.out.println("You suddenly feel nauseated. Strength down.");
 		} else if(selectedStat == stamina) {
-		Player.setStamina(stamina - reduction);
+		this.setStamina(stamina - reduction);
 		System.out.println("You suddenly feel nauseated. Stamina down.");
 		} else if(selectedStat == hitPoints) {
-		Player.setHitPoints(hitPoints - reduction);
+		this.setHitPoints(hitPoints - reduction);
 		System.out.println("You suddenly feel nauseated. HP down.");
 		}
 	
@@ -89,41 +100,41 @@ public class Player implements Serializable {
 		return name;
 	}
 	
-	public static int getHP() {
-		return hitPoints;
+	public int getHP() {
+		return this.hitPoints;
 	}
 	
-	public static int getSTR() {
+	public int getSTR() {
 		return strength; 
 	}
 	
-	public static int getSTA() {
+	public int getSTA() {
 		return stamina;
 	}
 	
-	public static void setHitPoints(int hitPoints) {
-		Player.hitPoints = hitPoints;
+	public void setHitPoints(int hitPoints) {
+		this.hitPoints = hitPoints;
 	}
 
-	public static void setStrength(int strength) {
-		Player.strength = strength;
+	public void setStrength(int strength) {
+		this.strength = strength;
 	}
 
-	public static void setStamina(int stamina) {
-		Player.stamina = stamina;
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
 	}
 
 	public int getEXP() {
-		return EXP; 
+		return this.EXP; 
 	}
 	
 	public int getScore() {
-		return score;
+		return this.score;
 	}
 	
 	@Override
 	public String toString() {
-		return ("Your player's stats are: " 
+		return ("Your player's stats are: \n" 
 	+ "\nName: " + name 
 	+ "\nHP: " + hitPoints
 	+ "\nStrength: " + strength
