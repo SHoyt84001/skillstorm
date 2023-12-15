@@ -1,7 +1,4 @@
 package com.skillstorm.Scene;
-
-import java.lang.reflect.Array;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import com.skillstorm.projectData.*;
 import com.skillstorm.PlayerClass.*;
-
 
 public class Scene {
 	
@@ -70,7 +66,7 @@ public class Scene {
 		return corruptionCount;
 	}
 
-	//////////////////////// SCENE STARTER ////////////////////////
+	///////////////////////// SCENE STARTER ///////////////////////////
 
 	public void gameStart() {
 		
@@ -112,7 +108,7 @@ public class Scene {
 		handleThirdChoice();
 		
 		if (corruptionCount == 3) {
-			System.out.println("FULL CORRUPTION");
+			System.out.println("\nFULL CORRUPTION");
 			this.completeCorruption = true;
 		}
 		
@@ -124,7 +120,25 @@ public class Scene {
 		sceneRoomOne();
 	}
 	
+	////////////////////ROOM SHUFFLER (FISHER-YATES ALGORITHM) //////////////////
+	public void roomShuffle(List<String> list) {
+		// make new random number obj
+		Random random = new Random();
+		// randomly draw an element until no more remain
+		for (int i = list.size() - 1; i > 0; i--) {
+		// get random number 1 to 3 exclusive, so add one
+		int index = random.nextInt(i + 1);
+		// get the third element for temporary storage
+		String tempIndex = list.get(i);
+		// replace value at position i with random number
+		list.set(i, list.get(index));
+		// temporarily store max size of the list to the third element
+		// otherwise every time this is run, an index will be lost
+		list.set(index, tempIndex);
+		}
+	}
 
+	/////////////////////// NEXT ROOM HANDLER ////////////////////////
 	public String handleNextRoom(List<String> roomList, List<String> visitedRooms) {
 		// run the shuffle method using the provided roomList as input
 		roomShuffle(roomList);
@@ -138,23 +152,6 @@ public class Scene {
 		return null;
 	}
 	
-	//////////////////// ROOM SHUFFLER (HATED THIS) //////////////////
-	public void roomShuffle(List<String> list) {
-		// make new random number obj
-		Random random = new Random();
-		// starting at last element of list, iterates down to the first
-		for (int i = list.size() - 1; i > 0; i--) {
-			// get random number 1 to 3 exclusive, so add one
-			int index = random.nextInt(i + 1);
-			// get the third element
-			String room = list.get(i);
-			// replace value at position i with random number
-			list.set(i, list.get(index));
-			// temporarily store max size of the list to the third element
-			// otherwise every time this is run, an index will be lost
-			list.set(index, room);
-		}
-	}
 	
 	////////////// GAMESTART handlers ////////////////
 	public void handleIntroduction() {
@@ -283,8 +280,10 @@ public class Scene {
 		 * 3. Once the panel is fixed and the door is opened, the user will be able to go through
 		 * 4. Then random other scenes will start
 		 */
+		
 		System.out.println("\nYou are in a dark room. At the end of the room, you see a panel and a door.");
 		System.out.println("\nWhat do you do?\n");
+		
 		String[] roomOneOptions;
 		
 		if(!doorOneOpened) {
@@ -300,11 +299,14 @@ public class Scene {
 		do {
 			roomOneChoice = sanitizeInput(userIn.nextLine());
 			
+			// check user input and point them to the panel if input matches
 			if (roomOneChoice.equalsIgnoreCase("Examine") || roomOneChoice.equalsIgnoreCase("1") || roomOneChoice.equalsIgnoreCase("panel")) {
 				examinePanelOne();
+			// user looks around, offering some info
 			} else if (roomOneChoice.equalsIgnoreCase("Look around") || roomOneChoice.equalsIgnoreCase("2")) {
 				System.out.println("\nA door is illuminated faintly next to the control panel.\n"); 
 				sceneRoomOne();
+			// when checking the door, if it is not opened then the user will turn around
 			} else if (!doorOneOpened && (roomOneChoice.equalsIgnoreCase("3") || roomOneChoice.equalsIgnoreCase("door") || roomOneChoice.equalsIgnoreCase("try the door"))) {
 				System.out.println("\nYou try the door. It is completely smooth, with no handles.\n");
 				System.out.println("\nYou turn around.\n");
@@ -417,6 +419,7 @@ public class Scene {
 			examinePanelOne();
 		}
 	}
+	
 	
 	public void handleRedSwitch() {
 		String[] switchOptions = {"1. Press red switch", "2. Go back"};
@@ -549,7 +552,11 @@ public class Scene {
 				handleCheckDesk();
 			}
 			
-		} else if (computerChoice1.equalsIgnoreCase("no")){
+		} else if (!completeCorruption && (computerChoice1.equalsIgnoreCase("yes"))){
+			System.out.println("\nLIAR.\n");
+			loseTrigger();
+		
+		} else if(computerChoice1.equalsIgnoreCase("no")){
 			System.out.println("\nThe computer at the desk whirs.");
 			loseTrigger();
 		}
@@ -660,25 +667,11 @@ public class Scene {
             winTrigger();
         } else {
             System.out.println("\nNothing happens.");
+            sceneRoomThree();
         }
 	}
-	////////////// SCENE THREE HANDLERS /////////////
-	
-	
-	//////////////////// PROMPT USER TO PLAY AGAIN ////////////
-	
-	/*
-	 * System.out.println("Do you want to play again? yes/no: "); String playAgain =
-	 * userIn.nextLine().trim().toLowerCase();
-	 * 
-	 * if (!playAgain.equals("yes")){ System.out.println("Thanks for playing!");
-	 * break; }
-	 */
-	
-	
+
 	//////////////// RANDOM STAT REDUCER ////////////////
-	
-	// takes a random user stat and lowers it by a random int 1-10(incl)
 	
 	public void statReducer() {
 		// use getters to create an array of stats
@@ -703,7 +696,6 @@ public class Scene {
 	}
 	
 	///////////////// CHECKING FOR WIN/LOSE and KEEP TRACK /////////////
-	
 	
 	public void loseTrigger() {
 		loseCount++;
