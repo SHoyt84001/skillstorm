@@ -49,11 +49,7 @@ public class ProjectMain{
 		
 		Scene startScene = new Scene(userIn, player1);
 		startScene.gameStart();
-		
-		
-		
-		Scene roomOneScene = new Scene(userIn, player1);
-		roomOneScene.sceneRoomOne(player1);
+
 		
 	}
 }

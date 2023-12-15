@@ -1,6 +1,7 @@
 package com.skillstorm.PlayerClass;
 
 import java.io.*;
+import java.util.List;
 import java.util.Random;
 
 public class Player implements Serializable {
@@ -15,7 +16,7 @@ public class Player implements Serializable {
 	private int score;
 	private int winCount;
 	private int loseCount;
-
+	private int points;
 	
 	public Player() {
 		this.name = "CORRUPTED";
@@ -35,10 +36,9 @@ public class Player implements Serializable {
 		this.score = score;
 	}
 	
-	
-	
-	public void increaseScore(int points) {
-		score += points;
+	public void increaseEXP(int amount) {
+		EXP += amount;
+		System.out.println("You gained " + amount + " EXP!");
 	}
 	
 	public void statReducer() {
@@ -56,16 +56,15 @@ public class Player implements Serializable {
 		
 		if(selectedStat == strength) {
 		this.setStrength(strength - reduction);
-		System.out.println("You suddenly feel nauseated. Strength down.");
+		System.out.println("A heavy drowsiness overcomes you. Strength down.");
 		} else if(selectedStat == stamina) {
 		this.setStamina(stamina - reduction);
-		System.out.println("You suddenly feel nauseated. Stamina down.");
+		System.out.println("Your heart begins pounding. Stamina down.");
 		} else if(selectedStat == hitPoints) {
 		this.setHitPoints(hitPoints - reduction);
-		System.out.println("You suddenly feel nauseated. HP down.");
+		System.out.println("Your head feels like it's about to explode. HP down.");
 		}
-}
-	
+	}
 	
 	public void saveScore() {
 		try (ObjectOutputStream fileOut = new ObjectOutputStream(new FileOutputStream(new File("score.dat")))) {
@@ -85,9 +84,7 @@ public class Player implements Serializable {
 		
 		return player;
 	}
-	
-	
-	
+		
 	public void displayInfo() {
 		System.out.println("Stats: ");
 		System.out.println("Name: " + name);
@@ -143,5 +140,17 @@ public class Player implements Serializable {
 	+ "\nStamina: " + stamina
 	+ "\nExperience: " + EXP
 	+ "\nScore: " + score);
+	}
+
+	public int getPoints() {
+		return this.points;
+	}
+
+	public void setPoints(int i) {
+		this.points += i;
+	}
+
+	public void setExperience(int i) {
+		this.EXP += i;		
 	}
 }
