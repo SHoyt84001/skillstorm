@@ -5,7 +5,7 @@ import com.skillstorm.PlayerClass.Player;
 public class TestTest {
 	
 	public static void testSave() {
-		Player player1 = new Player("Half", 120, 5, 12, 55, 10);
+		Player player1 = new Player("CORRUPTED", 100, 20, 20, 0, 0);
 		SaveLoad save = new SaveLoad(player1);
 		save.save();
 	}
