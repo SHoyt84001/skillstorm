@@ -1,18 +1,14 @@
 package com.skillstorm.WeekSixFridayAssignment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 
 public class Athlete {
 	private String name; 
 	private int wins; 
 	private int careerEvents;
-	
-	public Athlete() {}
-	
+
 	public Athlete(int wins, int careerEvents) {
 		this.wins = wins;
 		this.careerEvents = careerEvents;
@@ -28,22 +24,12 @@ public class Athlete {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public int getWins() {
 		return wins;
-	}
-	public void setWins(int wins) {
-		this.wins = wins;
 	}
 	public int getCareerEvents() {
 		return careerEvents;
 	}
-	public void setCareerEvents(int careerEvents) {
-		this.careerEvents = careerEvents;
-	}
-
 	
 	@Override 
 	public String toString() {
@@ -74,9 +60,13 @@ public class Athlete {
 		System.out.println("Players in order of their % of wins: ");
 		System.out.println(athletes);
 		
+		// BONUS 
 		// total wins comparator that sorts players in decending order by their amount of wins
 		Collections.sort(athletes, new HigherWinsComparator().reversed());
 		System.out.println(athletes);
+		
+		
+
 		
 	}
 }
