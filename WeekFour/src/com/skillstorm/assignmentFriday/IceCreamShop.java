@@ -16,6 +16,7 @@ public class IceCreamShop {
     }
    
     public void serviceCustomer() throws IceCreamShopException {
+    	// making sure that the line isn't empty
     	if (customerLine.isEmpty()) { 
     		throw new IceCreamShopException("No customers are in line!");
     	}
@@ -31,7 +32,7 @@ public class IceCreamShop {
     	amountEarned += iceCreamCost;
     }
     
- 
+    // methods
     public void addCustomer(Customer customer) {
         customerLine.add(customer);
     }
